@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS users
     password TEXT NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS courses
+CREATE TABLE IF NOT EXISTS course
 (
     id BIGSERIAL PRIMARY KEY,
     start_date TIMESTAMP WITHOUT TIME ZONE,
@@ -29,11 +29,11 @@ CREATE TABLE IF NOT EXISTS lessons
     end_time TIMESTAMP WITHOUT TIME ZONE,
     day_of_week VARCHAR(64) NOT NULL,
     teacher_id INTEGER REFERENCES users (id),
-    courses_id INTEGER REFERENCES courses (id)
+    course_id INTEGER REFERENCES course (id)
 );
 
 CREATE TABLE IF NOT EXISTS students_courses
 (
     student_id INTEGER REFERENCES users (id),
-    courses_id INTEGER REFERENCES courses (id)
+    course_id INTEGER REFERENCES course (id)
 );

@@ -1,0 +1,31 @@
+GET http://localhost:8080/users
+Accept: application/json
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "firstName": "Vlad",
+  "lastName": "Savostikov",
+  "role": "STUDENT",
+  "login": "jconcent2",
+  "password": "123"
+}
+
+###
+PUT http://localhost:8080/users/6
+Content-Type: application/json
+
+{
+  "firstName": "Vladislav",
+  "lastName": "Savostikov",
+  "role": "STUDENT",
+  "login": "jconcent1",
+  "password": "123"
+}
+
+###
+DELETE http://localhost:8080/users/6
+Content-Type: application/json
+

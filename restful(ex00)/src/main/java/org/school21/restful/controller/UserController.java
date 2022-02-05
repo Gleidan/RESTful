@@ -2,6 +2,7 @@ package org.school21.restful.controller;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.school21.restful.exception.DuplicateLoginException;
 import org.school21.restful.exception.UserNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.service.UserService;
@@ -23,9 +24,13 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<Long> addNewUser(@RequestBody User user) {
-        log.info(user.toString());
-        return ResponseEntity.ok().body(userService.addNewUser(user).getId());
+    public ResponseEntity<Object> addNewUser(@RequestBody User user) {
+        log.info("Получен запрос на добавление пользователя. User: {}", user.toString());
+        try {
+            return ResponseEntity.ok().body(userService.addNewUser(user).getId());
+        } catch (DuplicateLoginException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/users/{user-id}")

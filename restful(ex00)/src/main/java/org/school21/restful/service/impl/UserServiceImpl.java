@@ -2,6 +2,7 @@ package org.school21.restful.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.school21.restful.exception.DuplicateLoginException;
 import org.school21.restful.exception.UserNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.repository.UserRepository;
@@ -26,6 +27,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public User addNewUser(User user) {
+        User checkUser = userRepository.findByLogin(user.getLogin());
+        if (checkUser != null) {
+            throw new DuplicateLoginException(String.format("User with login %s already exists", checkUser.getLogin()));
+        }
         return userRepository.save(user);
     }
 
