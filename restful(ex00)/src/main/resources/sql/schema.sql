@@ -32,8 +32,8 @@ CREATE TABLE IF NOT EXISTS lessons
     course_id INTEGER REFERENCES course (id)
 );
 
-CREATE TABLE IF NOT EXISTS students_courses
+CREATE TABLE IF NOT EXISTS course_students
 (
-    student_id INTEGER REFERENCES users (id),
+    students_id INTEGER REFERENCES users (id),
     course_id INTEGER REFERENCES course (id)
 );

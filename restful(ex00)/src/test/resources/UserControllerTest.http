@@ -14,7 +14,7 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:8080/users/6
+PUT http://localhost:8080/users/4
 Content-Type: application/json
 
 {
@@ -26,6 +26,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/users/6
+DELETE http://localhost:8080/users/4
 Content-Type: application/json
 

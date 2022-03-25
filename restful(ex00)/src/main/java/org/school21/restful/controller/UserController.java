@@ -3,7 +3,7 @@ package org.school21.restful.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.school21.restful.exception.DuplicateLoginException;
-import org.school21.restful.exception.UserNotFoundException;
+import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +43,7 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable("user-id") Long userId) {
         try {
             userService.deleteUser(userId);
-        } catch (UserNotFoundException e) {
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
         return ResponseEntity.ok().body("SUCCESS");

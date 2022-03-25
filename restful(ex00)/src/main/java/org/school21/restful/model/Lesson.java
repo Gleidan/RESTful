@@ -1,5 +1,6 @@
 package org.school21.restful.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,13 +12,17 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "lessons")
 public class Lesson {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date startTime;
     private Date endTime;
     private String dayOfWeek; // may be enum?
     @ManyToOne
     private User teacher;
+    @JsonIgnore
+    @OneToOne
+    private Course course;
 }

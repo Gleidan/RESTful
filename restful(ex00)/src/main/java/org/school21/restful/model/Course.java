@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Date startDate;
     private Date endDate;
@@ -25,5 +25,10 @@ public class Course {
     private List<User> students;
     private String description;
     @OneToMany
+    @JoinTable(
+            name = "lessons",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "id")
+    )
     private List<Lesson> lessons;
 }

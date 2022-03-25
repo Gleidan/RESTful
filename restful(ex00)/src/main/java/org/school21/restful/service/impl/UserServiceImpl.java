@@ -3,7 +3,7 @@ package org.school21.restful.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.school21.restful.exception.DuplicateLoginException;
-import org.school21.restful.exception.UserNotFoundException;
+import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.repository.UserRepository;
 import org.school21.restful.service.UserService;
@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new UserNotFoundException("User not found in database");
+            throw new EntityNotFoundException("User not found in database");
         }
         User user = userRepository.getById(id);
         userRepository.delete(user);
