@@ -7,6 +7,7 @@ import org.school21.restful.model.Lesson;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.repository.LessonRepository;
 import org.school21.restful.service.LessonService;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,5 +48,17 @@ public class LessonCourseImpl implements LessonService {
             lessonToUpdate.setEndTime(lesson.getEndTime());
         }
         return lessonRepository.save(lessonToUpdate);
+    }
+
+    @Override
+    public void deleteLessonFromCourse(Long courseId, Long lessonId) {
+        if (!coursesRepository.existsById(courseId)) {
+            throw new EntityNotFoundException("Курс с id " + courseId + " не найден");
+        }
+        if (!lessonRepository.existsById(lessonId)) {
+            throw new EntityNotFoundException("Урок с id " + lessonId + " не найден");
+        }
+        Lesson lesson = lessonRepository.getById(lessonId);
+        lessonRepository.delete(lesson);
     }
 }

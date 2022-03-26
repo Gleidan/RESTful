@@ -9,5 +9,5 @@ public interface LessonService {
     List<Lesson> getLessonsByCourse(Long courseId);
     Lesson addLessonToCourse(Lesson lesson);
     Lesson updateLessonInCourse(Lesson lesson, Long courseId);
-
+    void deleteLessonFromCourse(Long courseId, Long lessonId);
 }

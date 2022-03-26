@@ -22,6 +22,11 @@ public class Course {
     @ManyToOne
     private User teacher;
     @ManyToMany
+    @JoinTable(
+            name = "course_students",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "students_id")
+    )
     private List<User> students;
     private String description;
     @OneToMany

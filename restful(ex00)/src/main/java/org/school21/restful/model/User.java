@@ -1,10 +1,12 @@
 package org.school21.restful.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -20,4 +22,12 @@ public class User {
     private Role role;
     private String login;
     private String password;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "course_students",
+            joinColumns = @JoinColumn(name = "students_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> course;
 }
