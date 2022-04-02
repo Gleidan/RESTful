@@ -9,6 +9,9 @@ import org.school21.restful.model.User;
 import org.school21.restful.service.CoursesService;
 import org.school21.restful.service.LessonService;
 import org.school21.restful.service.StudentsService;
+import org.school21.restful.service.TeachersService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
@@ -24,10 +27,13 @@ public class CoursesController {
     private final CoursesService coursesService;
     private final LessonService lessonService;
     private final StudentsService studentsService;
+    private final TeachersService teachersService;
 
-    @GetMapping("/courses")
-    public ResponseEntity<List<Course>> getAllCourses() {
-        return ResponseEntity.ok().body(coursesService.getAllCourses());
+    @GetMapping(value = {"/courses", "/courses/page/{page-num}/size/{page-size}"})
+    public ResponseEntity<List<Course>> getAllCourses(@PathVariable(required = false, name = "page-num") Integer page,
+                                                      @PathVariable(required = false, name = "page-size") Integer size) {
+        Pageable pageable = page == null || size == null ? PageRequest.of(0, 10) : PageRequest.of(page, size);
+        return ResponseEntity.ok().body(coursesService.getAllCourses(pageable));
     }
 
     @PostMapping("/courses")
@@ -64,9 +70,12 @@ public class CoursesController {
         }
     }
 
-    @GetMapping("/courses/{course-id}/lessons")
-    public ResponseEntity<List<Lesson>> getLessonsByCourse(@PathVariable("course-id") Long courseId) {
-        return ResponseEntity.ok(lessonService.getLessonsByCourse(courseId));
+    @GetMapping(value = {"/courses/{course-id}/lessons", "/courses/{course-id}/lessons/page/{page-num}/size/{page-size}"})
+    public ResponseEntity<List<Lesson>> getLessonsByCourse(@PathVariable("course-id") Long courseId,
+                                                           @PathVariable(required = false, name = "page-num") Integer page,
+                                                           @PathVariable(required = false, name = "page-size") Integer size) {
+        Pageable pageable = page == null || size == null ? PageRequest.of(0, 10) : PageRequest.of(page, size);
+        return ResponseEntity.ok(lessonService.getLessonsByCourse(courseId, pageable));
     }
 
     @PostMapping("/courses/{course-id}/lessons")
@@ -101,9 +110,12 @@ public class CoursesController {
         }
     }
 
-    @GetMapping("/courses/{course-id}/students")
-    public ResponseEntity<Object> getStudentsByCourse(@PathVariable("course-id") Long courseId) {
-        return ResponseEntity.ok().body(studentsService.getStudentsByCourse(courseId));
+    @GetMapping(value = {"/courses/{course-id}/students", "/courses/{course-id}/students/page/{page-num}/size/{page-size}"})
+    public ResponseEntity<List<User>> getStudentsByCourse(@PathVariable("course-id") Long courseId,
+                                                          @PathVariable(name = "page-num", required = false) Integer pageNum,
+                                                          @PathVariable(name = "page-size", required = false) Integer pageSize) {
+        Pageable pageable = pageNum == null || pageSize == null ? PageRequest.of(0, 10) : PageRequest.of(pageNum, pageSize);
+        return ResponseEntity.ok().body(studentsService.getStudentsByCourse(courseId, pageable));
     }
 
 
@@ -124,6 +136,34 @@ public class CoursesController {
             return ResponseEntity.ok("SUCCESS");
         } catch (EntityNotFoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping(value = {"/courses/{course-id}/teachers", "/courses/{course-id}/teachers/page/{page-num}/size/{page-size}"})
+    public ResponseEntity<List<User>> getTeachersByCourse(@PathVariable("course-id") Long courseId,
+                                                          @PathVariable(name = "page-num", required = false) Integer pageNum,
+                                                          @PathVariable(name = "page-size", required = false) Integer pageSize) {
+        Pageable pageable = pageNum == null || pageSize == null ? PageRequest.of(0, 10) : PageRequest.of(pageNum, pageSize);
+        return ResponseEntity.ok(teachersService.getTeachersByCourse(courseId, pageable));
+    }
+
+    @PostMapping("/courses/{course-id}/teachers")
+    public ResponseEntity<Object> addTeacherToCourse(@PathVariable("course-id") Long courseId, @RequestBody User teacher) {
+        try {
+            teachersService.addTeacherToCourse(courseId, teacher);
+            return ResponseEntity.ok("SUCCESS");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body("Bad request");
+        }
+    }
+
+    @DeleteMapping("/courses/{course-id}/teachers/{teacher-id}")
+    public ResponseEntity<Object> deleteTeacherFromCourse(@PathVariable("course-id") Long courseId, @PathVariable("teacher-id") Long teacherId) {
+        try {
+            teachersService.deleteTeacherFromCourse(courseId, teacherId);
+            return ResponseEntity.ok("SUCCESS");
+        } catch (EntityNotFoundException e) {
+            return ResponseEntity.badRequest().body("Bad request");
         }
     }
 }

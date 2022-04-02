@@ -6,6 +6,8 @@ import org.school21.restful.exception.DuplicateLoginException;
 import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.service.UserService;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,9 +20,11 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/users")
-    public ResponseEntity<List<User>> getAllUsers() {
-        return ResponseEntity.ok().body(userService.getAllUsers());
+    @GetMapping(value = {"/users", "/users/page/{page-num}/size/{page-size}"})
+    public ResponseEntity<List<User>> getAllUsers(@PathVariable(name = "page-num", required = false) Integer pageNum,
+                                                  @PathVariable(name = "page-size", required = false) Integer pageSize) {
+        Pageable pageable = pageNum == null || pageSize == null ? PageRequest.of(0, 10) : PageRequest.of(pageNum, pageSize);
+        return ResponseEntity.ok().body(userService.getAllUsers(pageable));
     }
 
     @PostMapping("/users")

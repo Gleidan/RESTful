@@ -5,6 +5,7 @@ import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.Course;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.service.CoursesService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +17,8 @@ public class CoursesServiceImpl implements CoursesService {
     private final CoursesRepository coursesRepository;
 
     @Override
-    public List<Course> getAllCourses() {
-        return coursesRepository.findAll();
+    public List<Course> getAllCourses(Pageable pageable) {
+        return coursesRepository.findAll(pageable).getContent();
     }
 
     @Override

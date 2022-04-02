@@ -19,8 +19,13 @@ public class Course {
     private Date startDate;
     private Date endDate;
     private String name;
-    @ManyToOne
-    private User teacher;
+    @ManyToMany
+    @JoinTable(
+            name = "courses_teachers",
+            joinColumns = @JoinColumn(name = "course_id"),
+            inverseJoinColumns = @JoinColumn(name = "teacher_id")
+    )
+    private List<User> teachers;
     @ManyToMany
     @JoinTable(
             name = "course_students",

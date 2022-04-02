@@ -30,4 +30,12 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "course_id")
     )
     private List<Course> course;
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "courses_teachers",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "course_id")
+    )
+    private List<Course> teachingCourse;
 }

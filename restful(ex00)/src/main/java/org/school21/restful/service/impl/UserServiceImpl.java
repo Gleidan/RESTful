@@ -7,6 +7,7 @@ import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.User;
 import org.school21.restful.repository.UserRepository;
 import org.school21.restful.service.UserService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,8 +36,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<User> getAllUsers(Pageable pageable) {
+        return userRepository.findAll(pageable).getContent();
     }
 
     @Override

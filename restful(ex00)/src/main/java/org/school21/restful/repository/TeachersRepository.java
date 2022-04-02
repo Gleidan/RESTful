@@ -6,11 +6,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-public interface StudentRepository extends JpaRepository<User, Long> {
+public interface TeachersRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT * FROM users " +
-            "INNER JOIN course_students cs on users.id = cs.students_id " +
+            "INNER JOIN courses_teachers ct on users.id = ct.teacher_id " +
             "INNER JOIN course c on c.id = ?1",
             nativeQuery = true)
-    Page<User> getStudentsByCourse(Long id, Pageable pageable);
+    Page<User> getTeachersByCourse(Long id, Pageable pageable);
 }

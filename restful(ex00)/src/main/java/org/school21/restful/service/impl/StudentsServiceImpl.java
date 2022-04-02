@@ -7,6 +7,7 @@ import org.school21.restful.model.User;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.repository.StudentRepository;
 import org.school21.restful.service.StudentsService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,8 +21,8 @@ public class StudentsServiceImpl implements StudentsService {
     private final CoursesRepository coursesRepository;
 
     @Override
-    public List<User> getStudentsByCourse(Long courseId) {
-        return studentRepository.getStudentsByCourse(courseId);
+    public List<User> getStudentsByCourse(Long courseId, Pageable pageable) {
+        return studentRepository.getStudentsByCourse(courseId, pageable).getContent();
     }
 
     @Override
@@ -53,6 +54,5 @@ public class StudentsServiceImpl implements StudentsService {
         course.getStudents().remove(student);
         student.getCourse().remove(course);
         coursesRepository.save(course);
-        studentRepository.save(student);
     }
 }

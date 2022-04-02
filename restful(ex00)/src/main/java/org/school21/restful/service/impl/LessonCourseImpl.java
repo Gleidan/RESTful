@@ -7,6 +7,7 @@ import org.school21.restful.model.Lesson;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.repository.LessonRepository;
 import org.school21.restful.service.LessonService;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,8 @@ public class LessonCourseImpl implements LessonService {
     private final CoursesRepository coursesRepository;
 
     @Override
-    public List<Lesson> getLessonsByCourse(Long courseId) {
-        return lessonRepository.getLessonsByCourse(courseId);
+    public List<Lesson> getLessonsByCourse(Long courseId, Pageable pageable) {
+        return lessonRepository.getLessonsByCourse(courseId, pageable).getContent();
     }
 
     @Override
