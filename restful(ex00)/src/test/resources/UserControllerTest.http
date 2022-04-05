@@ -6,10 +6,10 @@ POST http://localhost:8080/users
 Content-Type: application/json
 
 {
-  "firstName": "Dima",
-  "lastName": "Savostikov",
+  "firstName": "TESTUSER4",
+  "lastName": "TESTUSER4",
   "role": "STUDENT",
-  "login": "DimaJco",
+  "login": "TESTUSER4",
   "password": "123"
 }
 
@@ -18,11 +18,8 @@ PUT http://localhost:8080/users/4
 Content-Type: application/json
 
 {
-  "firstName": "Vladislav",
-  "lastName": "Savostikov",
-  "role": "STUDENT",
-  "login": "jconcent1",
-  "password": "123"
+  "firstName": "TESTUSER4UPDATED",
+  "lastName": "TESTUSER4UPDATED"
 }
 
 ###

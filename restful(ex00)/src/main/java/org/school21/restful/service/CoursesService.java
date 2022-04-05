@@ -11,5 +11,5 @@ public interface CoursesService {
     Course addCourse(Course course);
     Course getCourseById(Long id);
     Course updateCourseById(Long id, Course course);
-    void deleteUser(Long id);
+    void deleteCourse(Long id);
 }

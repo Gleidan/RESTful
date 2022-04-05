@@ -3,9 +3,12 @@ package org.school21.restful.service.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.school21.restful.exception.EntityNotFoundException;
+import org.school21.restful.model.Course;
 import org.school21.restful.model.Lesson;
+import org.school21.restful.model.User;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.repository.LessonRepository;
+import org.school21.restful.repository.TeachersRepository;
 import org.school21.restful.service.LessonService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.parameters.P;
@@ -19,6 +22,7 @@ public class LessonCourseImpl implements LessonService {
 
     private final LessonRepository lessonRepository;
     private final CoursesRepository coursesRepository;
+    private final TeachersRepository teachersRepository;
 
     @Override
     public List<Lesson> getLessonsByCourse(Long courseId, Pageable pageable) {
@@ -27,6 +31,13 @@ public class LessonCourseImpl implements LessonService {
 
     @Override
     public Lesson addLessonToCourse(Lesson lesson) {
+        if (lesson.getTeacher() != null) {
+            User teacher = teachersRepository.getById(lesson.getTeacher().getId());
+            Course course = coursesRepository.getById(lesson.getCourse().getId());
+            if (course.getTeachers() == null || !course.getTeachers().contains(teacher)) {
+                throw new IllegalArgumentException("Not valid user");
+            }
+        }
         return lessonRepository.save(lesson);
     }
 

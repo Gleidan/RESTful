@@ -3,6 +3,7 @@ package org.school21.restful.service.impl;
 import lombok.AllArgsConstructor;
 import org.school21.restful.exception.EntityNotFoundException;
 import org.school21.restful.model.Course;
+import org.school21.restful.model.Role;
 import org.school21.restful.model.User;
 import org.school21.restful.repository.CoursesRepository;
 import org.school21.restful.repository.StudentRepository;
@@ -34,6 +35,9 @@ public class StudentsServiceImpl implements StudentsService {
             throw new EntityNotFoundException("Студент с id " + student.getId() + " не найден");
         }
         student = studentRepository.getById(student.getId());
+        if (!student.getRole().equals(Role.STUDENT)) {
+            throw new IllegalArgumentException("User with id " + student.getId() + " not have role STUDENT");
+        }
         Course course = coursesRepository.getById(courseId);
         List<Course> courses = new ArrayList<>();
         courses.add(course);
