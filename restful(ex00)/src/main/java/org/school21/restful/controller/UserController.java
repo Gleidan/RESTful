@@ -35,11 +35,7 @@ public class UserController {
     @PostMapping("/users")
     public ResponseEntity<Object> addNewUser(@RequestBody User user) {
         log.info("Получен запрос на добавление пользователя. User: {}", user.toString());
-        try {
-            return ResponseEntity.ok().body(userService.addNewUser(user).getId());
-        } catch (DuplicateLoginException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok().body(userService.addNewUser(user).getId());
     }
 
     @Operation(summary = "updateUser")
@@ -52,11 +48,7 @@ public class UserController {
     @Operation(summary = "deleteUser")
     @DeleteMapping("/users/{user-id}")
     public ResponseEntity<String> deleteUser(@PathVariable("user-id") Long userId) {
-        try {
-            userService.deleteUser(userId);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        userService.deleteUser(userId);
         return ResponseEntity.ok().body("SUCCESS");
     }
 }

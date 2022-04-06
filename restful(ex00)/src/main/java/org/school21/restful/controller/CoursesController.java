@@ -50,32 +50,20 @@ public class CoursesController {
     @Operation(summary = "getCourse")
     @GetMapping("/courses/{course-id}")
     public ResponseEntity<Object> getCourse(@PathVariable("course-id") Long courseId) {
-        try {
-            return ResponseEntity.ok(coursesService.getCourseById(courseId));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(coursesService.getCourseById(courseId));
     }
 
     @Operation(summary = "updateCourse")
     @PutMapping("/courses/{course-id}")
     public ResponseEntity<Object> updateCourse(@RequestBody Course course, @PathVariable("course-id") Long courseId) {
-        try {
-            return ResponseEntity.ok(coursesService.updateCourseById(courseId, course));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(coursesService.updateCourseById(courseId, course));
     }
 
     @Operation(summary = "deleteCourse")
     @DeleteMapping("/courses/{course-id}")
     public ResponseEntity<String> deleteCourse(@PathVariable("course-id") Long courseId) {
-        try {
-            coursesService.deleteCourse(courseId);
-            return ResponseEntity.ok("Course with id " + courseId + " deleted");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        coursesService.deleteCourse(courseId);
+        return ResponseEntity.ok("Course with id " + courseId + " deleted");
     }
 
     @Operation(summary = "getLessonsByCourse")
@@ -104,22 +92,15 @@ public class CoursesController {
                                                        @RequestBody Lesson lesson) {
         log.info("Получен запрос на обновление урока {} в курсе {}", lesson, courseId);
         lesson.setId(lessonId);
-        try {
-            return ResponseEntity.ok(lessonService.updateLessonInCourse(lesson, courseId));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(lessonService.updateLessonInCourse(lesson, courseId));
     }
 
     @Operation(summary = "deleteLessonFromCourse")
     @DeleteMapping("/courses/{course-id}/lessons/{lesson-id}")
     public ResponseEntity<String> deleteLessonFromCourse(@PathVariable("course-id") Long courseId, @PathVariable("lesson-id") Long lessonId) {
-        try {
-            lessonService.deleteLessonFromCourse(courseId, lessonId);
-            return ResponseEntity.ok("Lesson with id " + lessonId + " deleted");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        lessonService.deleteLessonFromCourse(courseId, lessonId);
+        return ResponseEntity.ok("Lesson with id " + lessonId + " deleted");
+
     }
 
     @Operation(summary = "getStudentsByCourse")
@@ -135,22 +116,14 @@ public class CoursesController {
     @PostMapping("/courses/{course-id}/students")
     public ResponseEntity<Object> addStudentToCourse(@PathVariable("course-id") Long courseId, @RequestBody User user) {
         log.info("Получен запрос на добавление нового студента {} в курс {}", user, courseId);
-        try {
-            return ResponseEntity.ok(studentsService.addStudentToCourse(courseId, user).getId());
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        return ResponseEntity.ok(studentsService.addStudentToCourse(courseId, user).getId());
     }
 
     @Operation(summary = "deleteStudentFromCourse")
     @DeleteMapping("/courses/{course-id}/students/{student-id}")
     public ResponseEntity<Object> deleteStudentFromCourse(@PathVariable("course-id") Long courseId, @PathVariable("student-id") Long studentId) {
-        try {
-            studentsService.deleteStudentFromCourse(courseId, studentId);
-            return ResponseEntity.ok("SUCCESS");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
+        studentsService.deleteStudentFromCourse(courseId, studentId);
+        return ResponseEntity.ok("SUCCESS");
     }
 
     @Operation(summary = "getTeachersByCourse")
@@ -165,22 +138,14 @@ public class CoursesController {
     @Operation(summary = "addTeacherToCourse")
     @PostMapping("/courses/{course-id}/teachers")
     public ResponseEntity<Object> addTeacherToCourse(@PathVariable("course-id") Long courseId, @RequestBody User teacher) {
-        try {
-            teachersService.addTeacherToCourse(courseId, teacher);
-            return ResponseEntity.ok("SUCCESS");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body("Bad request");
-        }
+        teachersService.addTeacherToCourse(courseId, teacher);
+        return ResponseEntity.ok("SUCCESS");
     }
 
     @Operation(summary = "deleteTeacherFromCourse")
     @DeleteMapping("/courses/{course-id}/teachers/{teacher-id}")
     public ResponseEntity<Object> deleteTeacherFromCourse(@PathVariable("course-id") Long courseId, @PathVariable("teacher-id") Long teacherId) {
-        try {
-            teachersService.deleteTeacherFromCourse(courseId, teacherId);
-            return ResponseEntity.ok("SUCCESS");
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().body("Bad request");
-        }
+        teachersService.deleteTeacherFromCourse(courseId, teacherId);
+        return ResponseEntity.ok("SUCCESS");
     }
 }
