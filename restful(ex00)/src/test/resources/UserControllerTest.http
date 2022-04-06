@@ -1,0 +1,28 @@
+GET http://localhost:8080/users
+Accept: application/json
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+  "firstName": "TESTUSER4",
+  "lastName": "TESTUSER4",
+  "role": "STUDENT",
+  "login": "TESTUSER4",
+  "password": "123"
+}
+
+###
+PUT http://localhost:8080/users/4
+Content-Type: application/json
+
+{
+  "firstName": "TESTUSER4UPDATED",
+  "lastName": "TESTUSER4UPDATED"
+}
+
+###
+DELETE http://localhost:8080/users/4
+Content-Type: application/json
+
