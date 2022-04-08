@@ -1,0 +1,108 @@
+GET http://localhost:8080/courses
+Accept: application/json
+
+###
+
+POST http://localhost:8080/courses
+Content-Type: application/json
+
+{
+  "startDate": "2022-03-16T11:06:00",
+  "endDate": "2022-03-19T11:06:00",
+  "name": "TESTCOURSE1",
+  "students": [
+    {"id": 1}, {"id": 5}
+  ],
+  "description": "TEST COURSE 1"
+}
+
+###
+
+GET http://localhost:8080/courses/5
+Accept: application/json
+
+###
+
+PUT http://localhost:8080/courses/1
+Content-Type: application/json
+
+{
+  "name": "TEST COURSE 1 UPDATED",
+  "description": "Course not about it"
+}
+
+###
+
+DELETE http://localhost:8080/courses/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/courses/2/lessons
+Accept: application/json
+
+###
+
+POST http://localhost:8080/courses/2/lessons
+Content-Type: application/json
+
+{
+  "startTime": "2022-03-20T11:06:00",
+  "endTime": "2022-03-25T11:06:00",
+  "dayOfWeek": "Friday",
+  "teacher": {
+    "id": 5
+  }
+}
+
+###
+
+PUT http://localhost:8080/courses/2/lessons/1
+Content-Type: application/json
+
+{
+  "dayOfWeek": "Sunday"
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/lessons/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/courses/2/students
+Accept: application/json
+
+###
+
+POST http://localhost:8080/courses/2/students
+Content-Type: application/json
+
+{
+  "id": "2"
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/students/2
+Accept: application/json
+
+###
+
+GET http://localhost:8080/courses/2/teachers
+Accept: application/json
+
+###
+
+POST http://localhost:8080/courses/2/teachers
+Content-Type: application/json
+
+{
+  "id": 2
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/teachers/2
+Accept: application/json
