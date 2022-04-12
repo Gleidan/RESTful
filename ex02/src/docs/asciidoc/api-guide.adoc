@@ -1,0 +1,21 @@
+= Course API
+:doctype: book
+:sectanchors:
+:sectlinks:
+
+== Methods
+
+=== Course publish
+You can publish a course with status *DRAFT*.
+
+==== request
+include::{snippets}/publishTest/http-request.adoc[]
+==== response
+include::{snippets}/publishTest/http-response.adoc[]
+==== Table 1. response-fields
+|===
+^|*Path* ^| *Type* ^| *Description*
+^|startDate ^| String ^| Start date of course
+^|endDate ^| String ^| End date of course
+^|description ^| String ^| Description of course
+^|state ^| String ^| State of course
