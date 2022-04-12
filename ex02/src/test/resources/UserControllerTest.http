@@ -1,0 +1,48 @@
+GET http://localhost:8080/users
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjIsImV4cCI6MTY1MDkyMDQwMH0.t8xY4FFvAZTkrhkApJKMvZlmgu4-IxwvAvgChPHBNY6ekmg4t6-QeH9LRQrGBuTn6Bj9P-mdhyxBNLCeOu4SQA
+
+###
+POST http://localhost:8080/users
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjIsImV4cCI6MTY1MDkyMDQwMH0.t8xY4FFvAZTkrhkApJKMvZlmgu4-IxwvAvgChPHBNY6ekmg4t6-QeH9LRQrGBuTn6Bj9P-mdhyxBNLCeOu4SQA
+
+{
+  "firstName": "TESTSTUDENT1",
+  "lastName": "TESTSTUDENT1",
+  "role": "STUDENT",
+  "login": "STD1",
+  "password": "STD1"
+}
+
+###
+PUT http://localhost:8080/users/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDgzNDAwMH0.QbEP_B8UDDdrUS-0cP5MAp0-0Tmwm7FiBKNDxxVLlmXwJcDXE0VFA-5u3oW-ImGEd7yqVNPHj1Ke34lZdt0tVA
+
+{
+  "firstName": "TESTMANAGER11UPDATED",
+  "lastName": "TESTMANAGER11UPDATED",
+  "role": "STUDENT",
+  "login": "TESTMANAGER11",
+  "password": "TEST11"
+}
+
+###
+DELETE http://localhost:8080/users/10
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDgzNDAwMH0.QbEP_B8UDDdrUS-0cP5MAp0-0Tmwm7FiBKNDxxVLlmXwJcDXE0VFA-5u3oW-ImGEd7yqVNPHj1Ke34lZdt0tVA
+
+###
+
+POST http://localhost:8080/auth
+Content-Type: application/json
+
+{
+  "login": "admin",
+  "password": "admin"
+}
+
+###
+
+GET http://localhost:8080

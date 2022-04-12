@@ -41,29 +41,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST,
-                        "/users",
-                        "/courses",
-                        "/courses/*/lessons",
-                        "/courses/*/students",
-                        "/courses/*/teachers").hasRole("ADMINISTRATOR")
-                .antMatchers(HttpMethod.PUT,
-                        "/users/*",
-                        "/courses/*",
+                .antMatchers(HttpMethod.POST, "/users", "/courses",
+                        "/courses/*/lessons", "/courses/*/students", "/courses/*/teachers").hasRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.PUT, "/users/*", "/courses/*",
                         "/courses/*/lessons/*").hasRole("ADMINISTRATOR")
-                .antMatchers(HttpMethod.DELETE,
-                        "/users/*",
-                        "/courses/*",
-                        "/courses/*/lessons/*",
-                        "/courses/*/students/*",
-                        "/courses/*/teachers/*").hasRole("ADMINISTRATOR")
-                .antMatchers(HttpMethod.GET,
-                        "/users",
-                        "/courses",
-                        "/courses/*",
-                        "/courses/*/lessons",
-                        "/courses/*/students",
-                        "/courses/*/teachers").hasAnyRole("ADMINISTRATOR", "TEACHER", "STUDENT")
+                .antMatchers(HttpMethod.DELETE, "/users/*", "/courses/*", "/courses/*/lessons/*",
+                        "/courses/*/students/*", "/courses/*/teachers/*").hasRole("ADMINISTRATOR")
+                .antMatchers(HttpMethod.GET, "/users", "/courses", "/courses/*",
+                        "/courses/*/lessons", "/courses/*/students", "/courses/*/teachers").hasAnyRole("ADMINISTRATOR", "TEACHER", "STUDENT")
         .and().addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 

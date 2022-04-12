@@ -1,0 +1,127 @@
+GET http://localhost:8080/courses
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+PUT http://localhost:8080/courses/3/publish
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+POST http://localhost:8080/courses
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+{
+  "startDate": "2022-03-16T11:06:00",
+  "endDate": "2022-03-19T11:06:00",
+  "name": "TESTCOURSE1",
+  "students": [
+    "http://localhost:8080/users/2"
+  ],
+  "state": "DRAFT",
+  "description": "TEST COURSE 1"
+}
+
+###
+
+GET http://localhost:8080/courses/9
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+PUT http://localhost:8080/courses/7
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+{
+  "startDate": "2022-03-16T11:06:00.000+00:00",
+  "endDate": "2022-03-19T11:06:00.000+00:00",
+  "name": "TEST COURSE 1 UPDATED",
+  "description": "Course not about it"
+}
+
+###
+
+DELETE http://localhost:8080/courses/7
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+GET http://localhost:8080/courses/9/lessons
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+POST http://localhost:8080/courses/9/lessons
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+{
+  "startTime": "2022-03-20T11:06:00",
+  "endTime": "2022-03-25T11:06:00",
+  "dayOfWeek": "Friday",
+  "teacher": "http://localhost:8080/users/3",
+  "course": "http://localhost:8080/courses/9"
+}
+
+###
+
+PUT http://localhost:8080/courses/9/lessons/5
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+{
+  "dayOfWeek": "Sunday"
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/lessons/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/courses/9/students
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+###
+
+POST http://localhost:8080/courses/9/students
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjYsImV4cCI6MTY1MDY2MTIwMH0.re5bkRm1ch7hsUqZs2GJcZjdkQnT3E90YPoM-TgPtpFd_34wCzomP6jF679MhJl5qRiz0SSxgui-Wi_CuYNrag
+
+{
+  "student": "http://localhost:8080/8"
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/students/2
+Accept: application/json
+
+###
+
+GET http://localhost:8080/courses/2/teachers
+Accept: application/json
+
+###
+
+POST http://localhost:8080/courses/2/teachers
+Content-Type: application/json
+
+{
+  "id": 2
+}
+
+###
+
+DELETE http://localhost:8080/courses/2/teachers/2
+Accept: application/json

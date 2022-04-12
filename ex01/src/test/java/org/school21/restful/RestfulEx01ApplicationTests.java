@@ -39,6 +39,8 @@ class RestfulEx01ApplicationTests {
     @MockBean
     private CoursesService coursesService;
 
+    private final String token = "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjEsImV4cCI6MTY1MTAwNjgwMH0.zX55OscWtRRZngDgHk3KeKYThggvs75zdvOw-CKJKdsrpqe5Di9Hy1c_e-lysdxO5gIKFvCTsnYkUx3zcmxJFw";
+
     private final Date now = new Date();
 
     @BeforeEach
@@ -51,7 +53,9 @@ class RestfulEx01ApplicationTests {
 
     @Test
     public void getCourseByIdTest() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/courses/1").accept(MediaType.APPLICATION_JSON)).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/courses/1")
+                .header("Authorization", token)
+                .accept(MediaType.APPLICATION_JSON)).andReturn();
         assertEquals(200, result.getResponse().getStatus());
         assertNotNull(result.getResponse().getContentAsString());
 
@@ -65,6 +69,7 @@ class RestfulEx01ApplicationTests {
     @Test
     public void addCourseTest() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/courses")
+                .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(new Course()))
                 .accept(MediaType.APPLICATION_JSON))
@@ -82,6 +87,7 @@ class RestfulEx01ApplicationTests {
     @Test
     public void updateCourseTest() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.put("/courses/1")
+                .header("Authorization", token)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(new Course()))
                 .accept(MediaType.APPLICATION_JSON))
@@ -99,6 +105,7 @@ class RestfulEx01ApplicationTests {
     @Test
     public void deleteCourseTest() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.delete("/courses/1")
+                .header("Authorization", token)
                 .accept(MediaType.APPLICATION_JSON))
                 .andReturn();
         assertEquals(200, result.getResponse().getStatus());
