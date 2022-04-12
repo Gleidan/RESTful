@@ -1,6 +1,6 @@
 GET http://localhost:8080/users
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJURVNUTUFOQUdFUjEwIiwiUk9MRSI6IlNUVURFTlQiLCJJRCI6OCwiZXhwIjoxNjUwNjYxMjAwfQ.5AldU4Ue94trZHHPA7nouX-bv1g_REhI6r6wabp8yjkOagI2dfm7xxSfJvLRUHOUV1njgydZSJwPVkfIU4ncBQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIlJPTEUiOiJBRE1JTklTVFJBVE9SIiwiSUQiOjEsImV4cCI6MTY1MTAwNjgwMH0.zX55OscWtRRZngDgHk3KeKYThggvs75zdvOw-CKJKdsrpqe5Di9Hy1c_e-lysdxO5gIKFvCTsnYkUx3zcmxJFw
 
 ###
 POST http://localhost:8080/users
@@ -34,6 +34,6 @@ POST http://localhost:8080/auth
 Content-Type: application/json
 
 {
-  "login": "TESTMANAGER10",
-  "password": "TEST10"
+  "login": "admin",
+  "password": "admin"
 }

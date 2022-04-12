@@ -17,6 +17,6 @@ public class SwaggerConfig {
                         .version("1.0.0")
                         .contact(new Contact()
                                 .email("jconcent@student.21-school.ru")
-                                .name("Jconcent")));
+                                .name("Jconcent, Sesprigg")));
     }
 }
